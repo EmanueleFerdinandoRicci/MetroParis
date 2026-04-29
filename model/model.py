@@ -9,6 +9,32 @@ class Model:
         for f in self._fermate:
             self._idMapFermate[f.id_fermata] = f
 
+    def getBFSNodesFromEdges(self, source):
+        archi = nx.bfs_edges(self._grafo, source)
+        nodiBFS = []
+        for u,v in archi:
+            nodiBFS.append(v)
+        return nodiBFS
+
+    def getDFSNodesFromEdges(self, source):
+        archi = nx.dfs_edges(self._grafo, source)
+        nodiDFS = []
+        for u,v in archi:
+            nodiDFS.append(v)
+        return nodiDFS
+
+    def getBFSNodesFromTree(self,source):
+        tree = nx.bfs_tree(self._grafo, source)
+        archi = list(tree.edges())
+        nodi = list(tree.nodes())
+        return nodi
+
+    def getDFSNodesFromTree(self,source):
+        tree = nx.dfs_tree(self._grafo, source)
+        archi = list(tree.edges())
+        nodi = list(tree.nodes())
+        return nodi
+
     def buildGraph(self):
         self._grafo.clear() #dobbiamo assicurarci che il grafo che usiamo sia vuoto completamente
         self._grafo.add_nodes_from(self._fermate)
